@@ -7,10 +7,6 @@ This repository contains my practice work for the Phitron computer fundamentals 
 - [About the Course](#about-the-course)
 - [Topics Covered](#topics-covered)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## About the Course
 
