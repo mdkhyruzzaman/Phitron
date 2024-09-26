@@ -29,7 +29,7 @@ int main()
         EdgeList.push_back(Edge(a, b, w));
     }
 
-    long long int dis[n];
+    long long int dis[n+1];
     for(int i = 1; i<=n; i++)
     {
         dis[i] = INT_MAX;
