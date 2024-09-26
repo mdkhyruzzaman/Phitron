@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const long long int LL = 1e18;
+
 class Edge
 {
     public:
@@ -32,7 +34,7 @@ int main()
     long long int dis[n+1];
     for(int i = 1; i<=n; i++)
     {
-        dis[i] = INT_MAX;
+        dis[i] = LL;
     }
 
     int s, t; 
@@ -46,7 +48,7 @@ int main()
             u = ed.u;
             v = ed.v;
             w = ed.w;
-            if (dis[u] < INT_MAX && dis[u] + w < dis[v])
+            if (dis[u] < LL && dis[u] + w < dis[v])
             {
                 dis[v] = dis[u] + w;
             }
@@ -60,7 +62,7 @@ int main()
         u = ed.u;
         v = ed.v;
         w = ed.w;
-        if (dis[u] < INT_MAX && dis[u] + w < dis[v])
+        if (dis[u] < LL && dis[u] + w < dis[v])
         {
             cycle = true;
             break;
@@ -76,7 +78,7 @@ int main()
         {
             int d;
             cin>>d;
-            if(dis[d] != INT_MAX) cout<<dis[d]<<endl;
+            if(dis[d] != LL) cout<<dis[d]<<endl;
             else cout<<"Not Possible"<<endl;
         }
         
