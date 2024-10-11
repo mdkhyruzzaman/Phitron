@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const long long int LL = 1e18;
+
 int main()
 {
     int n, e;
@@ -10,7 +12,7 @@ int main()
     {
         for (int j = 0; j <= n; j++)
         {
-            arr[i][j] = INT_MAX;
+            arr[i][j] = LL;
             if (i == j) arr[i][j] = 0;
         }
     }
@@ -53,7 +55,7 @@ int main()
         int x, y;
         cin>>x>>y;
         // cout<<x<<y<<endl;
-        if(arr[x][y] != INT_MAX) cout<<arr[x][y]<<endl;
+        if(arr[x][y] != LL) cout<<arr[x][y]<<endl;
         else cout<<"-1"<<endl;
     }
     

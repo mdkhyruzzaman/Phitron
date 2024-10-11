@@ -45,7 +45,7 @@ int main()
     cin>>src>>des;
     memset(vis, false, sizeof(vis));
     memset(level, -1, sizeof(level));
-    memset(parent, -1, sizeof(level));
+    memset(parent, -1, sizeof(parent));
     bfs(src);
 
     int x = des;
