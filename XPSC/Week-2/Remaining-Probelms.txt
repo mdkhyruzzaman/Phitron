@@ -1,4 +1,1 @@
-Problem 9: https://codeforces.com/problemset/problem/1800/C2
-Problem 12: https://codeforces.com/problemset/problem/1744/C
-Problem 13: https://codeforces.com/problemset/problem/1986/C
 Problem 14: https://codeforces.com/problemset/problem/1790/D
