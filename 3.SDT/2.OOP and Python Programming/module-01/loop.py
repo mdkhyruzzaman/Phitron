@@ -9,4 +9,4 @@ while num1 <= 5:
 # for loop with range function
 
 for i in range(0, 5):
-    print("for loop printing: ", i+1)
+    print("for loop printing: ",i+1)
