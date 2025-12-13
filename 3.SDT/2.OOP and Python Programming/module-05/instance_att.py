@@ -11,9 +11,7 @@ class Shop:
 mehzbeen = Shop('meh jabeeen')
 mehzbeen.add_to_cart('shoes')
 mehzbeen.add_to_cart('phone')
-
 print(mehzbeen.cart)
-
 
 nisho = Shop('Noisho')
 nisho.add_to_cart('cap')

@@ -61,5 +61,4 @@ phitron.add_teacher('Tom Cruise', 'Algo')
 phitron.add_teacher('Decap', 'DS')
 phitron.add_teacher('AJ', 'Database')
 
-
 print(phitron)
