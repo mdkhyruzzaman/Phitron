@@ -1,5 +1,8 @@
+# user.py
 from abc import ABC
 from order import Order
+import copy
+from datetime import datetime
 
 class User(ABC):
     def __init__(self, name, email):
@@ -13,16 +16,23 @@ class Admin(User):
     # Managing the restautant menu
     def add_item(self, restaurant, item):
         restaurant.menu.add_item(item)
+        return f"{item.name} added!"
     
     def remove_item(self, restaurant, item_name):
         item = restaurant.menu.find_item(item_name)
         if item:
             restaurant.menu.remove_item(item)
+            return f"Item {item_name} is removed!"
+        else:
+            return f"Item {item_name} is not found."
 
     def update_item_price(self, restaurant, item_name, price):
         item = restaurant.menu.find_item(item_name)
         if item:
             item.price = price
+            return f"{item_name} price updated."
+        else:
+            return f"{item_name} is not found."
     
     def view_menu(self, restaurant):
         restaurant.menu.show_menu()
@@ -40,7 +50,7 @@ class Admin(User):
         customer = restaurant.find_customer(email)
         if customer:
             restaurant.remove_customer(customer)
-            return "Customer is Deleted!"
+            return "Customer is removed!"
         else:
             return "Customer is not found!"
     
@@ -52,7 +62,7 @@ class Customer(User):
         super().__init__(name, email)
         self.address = address
         self.wallet = 0
-        self.past_orders = []
+        self.past_orders = {} # {date, Order Object Copy}
         self.cart = Order()
     
     def view_menu(self, restaurant):
@@ -60,6 +70,7 @@ class Customer(User):
 
     def add_funds(self, amount):
         self.wallet += amount
+        return f"You are succefully add {amount}. Your new amount {self.check_balance}."
     
     @property
     def check_balance(self):
@@ -67,11 +78,29 @@ class Customer(User):
 
     def add_to_cart(self, restaurant, item_name, quantity):
         item = restaurant.menu.find_item(item_name)
-        self.cart.add_item(item, quantity)
+        return self.cart.add_item(item, quantity)
 
     def remove_to_cart(self, restaurant, item_name):
         item = restaurant.menu.find_item(item_name)
-        self.cart.remove_item(item)
+        return self.cart.remove_item(item)
 
     def view_cart(self):
         self.cart.view_order()
+
+    def place_order(self):
+        if not self.cart.items:
+            return "Cart is empty!"
+        
+        if self.cart.total_order_amount <= self.check_balance:
+            self.wallet -= self.cart.total_order_amount
+            self.past_orders[datetime.now()] = copy.deepcopy(self.cart)
+            self.cart.clear()
+            return 'Thank you for the order.'
+        else:
+            return 'Insufficient funds'
+        
+    def order_history(self):
+        print(f"Order History of {self.name}")
+        for order_date, order in self.past_orders.items():
+            print(f"Order Date: {order_date}")
+            order.view_order()

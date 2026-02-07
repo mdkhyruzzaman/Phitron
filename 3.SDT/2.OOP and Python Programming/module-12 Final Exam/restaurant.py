@@ -21,11 +21,14 @@ class Restaurant:
         self.customer_list.remove(customer)
 
     def view_customer(self):
-        print('Customer List')
-        print(f"{'Customer Name':>20}{'Customer Email':>20}{'Customer Address':>30}")
-        print('-' * 80)
+        print('-' * 100)
+        print(f"| {'Customer List':^96} |")
+        print('-' * 100)
+        print(f"| {'Customer Name':<30} | {'Customer Email':<30} | {'Customer Address':<30} |")
+        print('-' * 100)
         for customer in self.customer_list:
-            print(f"{customer.name:>20}{customer.email:>20}{customer.address:>30}")
+            print(f"| {customer.name:<30} | {customer.email:<30} | {customer.address:<30} |")
+            print('-' * 100)
     
     #Managing Admin
     def find_admin(self, email):
@@ -42,10 +45,10 @@ class Restaurant:
 
     def view_admin(self):
         print('Admin List')
-        print(f"{'Admin Name':>20}{'Admin Email':>20}")
+        print(f"{'Admin Name':<20}{'Admin Email':<20}")
         print('-' * 80)
         for admin in self.admin_list:
-            print(f"{admin.name:>20}{admin.email:>20}")
+            print(f"{admin.name:<20}{admin.email:<20}")
 
     #Auth
     def login(self, email, role):

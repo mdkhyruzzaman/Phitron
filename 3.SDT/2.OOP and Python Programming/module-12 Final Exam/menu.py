@@ -16,7 +16,11 @@ class Menu:
         self.item_list.remove(item)
 
     def show_menu(self):
-        print("Item Name\tPrice\tQuantity")
-        print('-'*40)
+        print('-'*80)
+        print(f"| {'Menu Items':^76} |")
+        print('-'*80)
+        print(f"| {'Item Name':<30} | {'Price':>20} | {'Quantity':>20} |")
+        print('-'*80)
         for item in self.item_list:
-            print(f"{item.name}{'\t' if len(item.name)<6 else ''}\t{item.price}\t{item.quantity}")
+            print(f"| {item.name:<30} | {item.price:>20} | {item.quantity:>20} |")
+            print('-'*80)
