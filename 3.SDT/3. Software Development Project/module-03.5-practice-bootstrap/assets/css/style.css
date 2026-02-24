@@ -1,0 +1,5 @@
+#hero-section .carousel-inner img {
+    object-fit: cover;
+    min-height: 100px;
+    max-height: 400px;
+}
