@@ -1,0 +1,176 @@
+{% extends "dashboard/dashboard.html" %}
+{% block title %}User Dashboard{% endblock title %}User Dashboard
+{% block task %}
+{% comment %} Tasks Cards {% endcomment %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Today's Tasks Table -->
+    <div class="bg-white rounded-xl shadow-sm py-4">
+        <div class="pl-4">
+            <h2 class="text-xl font-semibold">Today's Tasks</h2>
+        </div>
+        <!-- Task Items -->
+        <div class="px-2">
+            <!-- Task 1 -->
+            <div class="grid grid-cols-2 p-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div>
+                        <span>Complete project proposal</span>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <span class="text-gray-500">High</span>
+                </div>
+            </div>
+            <!-- Task 2 -->
+            <div class="grid grid-cols-2 p-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                    <div>
+                        <span>Review team updates</span>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <span class="text-gray-500">Normal</span>
+                </div>
+            </div>
+            <!-- Task 3 -->
+            <div class="grid grid-cols-2 p-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <div>
+                        <span>Prepare for client meeting</span>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <span class="text-gray-500">Low</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- All Tasks Table -->
+    <div class="bg-white rounded-xl shadow-sm py-4">
+        <div class="pl-4">
+            <h2 class="text-xl font-semibold">All Tasks</h2>
+        </div>
+        <div class="hidden md:grid grid-cols-4 p-2 pl-4 text-sm text-gray-500">
+            <div>TASK TITLE</div>
+            <div>PRIORITY</div>
+            <div>TEAM</div>
+            <div>CREATED AT</div>
+        </div>
+        <!-- Task Items -->
+        <div class="px-2 divide-y divide-gray-100 md:divide-y-0">
+            <!-- Task 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 p-2 gap-4 items-center">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <div>
+                            <span>Test Low Task</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
+                    <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600">Low</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TEAM</span>
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            CA</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            JS</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            B</div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
+                    <span class="text-gray-500">9 months ago</span>
+                </div>
+            </div>
+            <!-- Task 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 p-2 gap-4 items-center">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                        <div>
+                            <span>Test Task</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
+                    <span class="px-3 py-1 rounded-full bg-gray-50 text-gray-600">
+                        Normal
+                    </span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TEAM</span>
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            AJ</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            EV</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            B</div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
+                    <span class="text-gray-500">9 months ago</span>
+                </div>
+            </div>
+            <!-- Task 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 p-2 gap-4 items-center">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                        <div>
+                            <span>Test Task</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
+                    <span class="px-3 py-1 rounded-full bg-red-50 text-red-600">
+                        High
+                    </span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">TEAM</span>
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            CA</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            JS</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            AJ</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white text-sm border-2 border-white">
+                            B</div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
+                    <span class="text-gray-500">10 months ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock task %}

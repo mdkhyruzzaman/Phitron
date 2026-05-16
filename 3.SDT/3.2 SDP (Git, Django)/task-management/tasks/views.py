@@ -1,11 +1,12 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
-def home(request):
-    return HttpResponse("Welcome to Django.")
+def manager_dashboard(request):
+    return render(request, "dashboard/manager-dashboard.html")
 
-def contact(request):
-    return HttpResponse("<h1>Welcome to Contact Page</h1>")
+def user_dashboard(request):
+    return render(request, "dashboard/user-dashboard.html")
 
-def show_tasks(request):
-    return HttpResponse("Tasks List")
+def test_page(request):
+    return render(request, "test.html")
