@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from tasks.forms import TaskForm, TaskModelForm
-from tasks.models import Employee, Task
+from tasks.models import Employee, Task, TaskDetail, Project
+from datetime import date
+from django.db.models import Q
 
 # Create your views here.
 def manager_dashboard(request):
@@ -54,11 +56,40 @@ def create_task(request):
 
 def view_task(request):
     # retrive all data from tasks model
-    tasks = Task.objects.all()
+    # tasks = Task.objects.all()
 
     # retrive a specific task
-    task_3 = Task.objects.get(id = 3)
+    # task_3 = Task.objects.get(id = 3)
 
     #Fetch the first task
-    first_task = Task.objects.first()
-    return render(request, "show_task.html", {"tasks": tasks, "task3": task_3, "first_task": first_task})
+    # first_task = Task.objects.first()
+    # return render(request, "show_task.html", {"tasks": tasks, "task3": task_3, "first_task": first_task})
+
+    # Show the tasks that are completed
+    # tasks = Task.objects.filter(status = 'COMPLETED')
+
+    # Show the task which due data is today
+    # task = Task.objects.filter(due_date=date.today())
+
+    # Show the task whose priority is not low
+    # tasks = TaskDetail.objects.exclude(priority='L')
+
+    # Show the task that contain word 'paper' and status Pending
+    # tasks = Task.objects.filter(title_icontains="c", status="PENDING")
+
+    # Show the task which are pending or in-progress
+    # tasks = Task.objects.filter(Q(status = 'PENDING') | Q(status = 'IN_PROGRESS'))
+
+    # select related (ForeignKey, OneToOneField)
+    # For OneToOneField
+    # tasks = Task.objects.select_related('details').all()
+    # tasks = TaskDetail.objects.select_related('task').all()
+    # For ForeignKey
+    # tasks = Task.objects.select_related('project').all()
+
+    # prefetch_related (reverse ForeignKey, ManyToMany)
+    # tasks = Project.objects.prefetch_related('task_set').all()
+
+    #ManyToMany
+    tasks = Task.objects.prefetch_related('assigned_to').all()
+    return render(request, "show_task.html", {"tasks": tasks})
