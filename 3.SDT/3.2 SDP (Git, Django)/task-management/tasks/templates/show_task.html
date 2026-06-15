@@ -8,18 +8,12 @@
 <body>
     <div>
         <ul>
-            {% for task in tasks %}
-                <li>
-                    <p>{{task.title}}</p>
-                    <ul>
-                        {% for emp in task.assigned_to.all %}
-                            <li>
-                                <p>{{emp}}</p>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
+        {% for project in projects %}
+            <li>
+                <p>{{project.name}}</p>
+                <span>{{project.num_task}}</span>
+            </li>
+        {% endfor %}
         </ul>
     </div>
 </body>
