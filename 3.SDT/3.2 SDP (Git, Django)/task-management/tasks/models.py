@@ -28,7 +28,7 @@ class Task(models.Model):
 
 class TaskDetail(models.Model):
     PRIORITY_OPTIONS = (
-        ('H', 'Hight'),
+        ('H', 'High'),
         ('M', 'Medium'),
         ('L', 'Low')
     )

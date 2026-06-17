@@ -22,6 +22,7 @@ class StyledFormMixin:
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
             if isinstance(field.widget, forms.TextInput):
+
                 field.widget.attrs.update({
                     'class': self.default_classes,
                     'placeholder': f"Enter {field.label.lower()}"
@@ -34,7 +35,7 @@ class StyledFormMixin:
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):
                 field.widget.attrs.update({
-                    'class': self.default_classes
+                    'class': 'border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500'
                 })
             elif isinstance(field.widget, forms.CheckboxSelectMultiple):
                 field.widget.attrs.update({
@@ -51,24 +52,6 @@ class TaskModelForm(StyledFormMixin, forms.ModelForm):
             'due_date': forms.SelectDateWidget(),
             'assigned_to': forms.CheckboxSelectMultiple()
         }
-
-        ''' Manual Widget '''
-        # widgets = {
-        #     'title': forms.TextInput(attrs={
-        #         'class': 'border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500',
-        #         'placeholder': 'Enter a desriptive task title'
-        #     }),
-        #     'description': forms.Textarea(attrs={
-        #         'class': 'border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500',
-        #         'placeholder': 'Provide detailed task information'
-        #     }),
-        #     'due_date': forms.SelectDateWidget(attrs={
-        #         'class': 'border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500'
-        #     }),
-        #     'assigned_to': forms.CheckboxSelectMultiple(attrs={
-        #         'class': 'space-y-2'
-        #     })
-        # }
 
     '''Using Mixing Widget'''
     def __init__(self, *args, **kwargs):

@@ -11,115 +11,40 @@
     </div>
     <!-- Task Items -->
     <div class="divide-y divide-gray-100">
-        <!-- Task 1 -->
+        {% for task in tasks %}
         <div class="grid grid-cols-1 md:grid-cols-4 p-4 gap-4 items-center">
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
                 <div class="flex items-center gap-2">
                     <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                     <div>
-                        <span>Test Low Task</span>
+                        <span>{{task.title}}</span>
                     </div>
                 </div>
             </div>
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
-                <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600">Low</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">TEAM</span>
-                <div class="flex -space-x-2">
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        CA</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        JS</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        B</div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
-                <span class="text-gray-500">9 months ago</span>
-            </div>
-        </div>
-        <!-- Task 2 -->
-        <div class="grid grid-cols-1 md:grid-cols-4 p-4 gap-4 items-center">
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <div>
-                        <span>Test Task</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
-                <span class="px-3 py-1 rounded-full bg-gray-50 text-gray-600">
-                    Normal
+                <span class="px-3 py-1 rounded-full {% if task.details.priority == 'L' %}bg-blue-50 text-blue-600 {% elif task.details.priority == 'H' %} bg-red-50 text-red-600 {% else %} bg-gray-50 text-gray-600 {% endif %} ">
+                    {{task.details.get_priority_display}}
                 </span>
             </div>
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">TEAM</span>
                 <div class="flex -space-x-2">
+                    {% for emp in task.assigned_to.all %}
                     <div
                         class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        AJ</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        EV</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        B</div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
-                <span class="text-gray-500">9 months ago</span>
-            </div>
-        </div>
-        <!-- Task 3 -->
-        <div class="grid grid-cols-1 md:grid-cols-4 p-4 gap-4 items-center">
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                    <div>
-                        <span>Test Task</span>
+                        {{emp.name|slice:":2"|upper}}
                     </div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">PRIORITY</span>
-                <span class="px-3 py-1 rounded-full bg-red-50 text-red-600">
-                    High
-                </span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500 md:hidden">TEAM</span>
-                <div class="flex -space-x-2">
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        CA</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        JS</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        AJ</div>
-                    <div
-                        class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">
-                        B</div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
-                <span class="text-gray-500">10 months ago</span>
+                <span class="text-gray-500">{{task.created_at|timesince}}</span>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 
