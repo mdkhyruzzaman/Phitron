@@ -1,18 +1,27 @@
 {% extends "dashboard/dashboard.html" %}
 {% block title %}Manager Dashboard{% endblock title %}
 {% block task %}
+
 {% comment %} Task Table {% endcomment %}
 <div class="bg-white rounded-xl shadow-sm">
-    <div class="hidden md:grid grid-cols-4 p-4 border-b border-gray-100 text-sm text-gray-500">
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="px-2 py-1 {% if message.tags == 'success' %} bg-green-500 {% endif %}">{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="hidden md:grid grid-cols-5 p-4 gap-4 border-b border-gray-100 text-sm text-gray-500">
         <div>TASK TITLE</div>
         <div>PRIORITY</div>
         <div>TEAM</div>
         <div>CREATED AT</div>
+        <div>ACTIONS</div>
     </div>
     <!-- Task Items -->
     <div class="divide-y divide-gray-100">
         {% for task in tasks %}
-        <div class="grid grid-cols-1 md:grid-cols-4 p-4 gap-4 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-5 p-4 gap-4 items-center">
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">TASK TITLE</span>
                 <div class="flex items-center gap-2">
@@ -42,6 +51,16 @@
             <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500 md:hidden">CREATED AT</span>
                 <span class="text-gray-500">{{task.created_at|timesince}}</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-sm text-gray-500 md:hidden">ACTIONS</span>
+                <div class="flex gap-2">
+                    <a href="{% url "update-task" task.id %}" class="px-3 py-2 bg-rose-600 text-white rounded-md">Edit</a>
+                    <form action="{% url "delete-task" task.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="px-3 py-2 bg-rose-900 text-white rounded-md">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
         {% endfor %}

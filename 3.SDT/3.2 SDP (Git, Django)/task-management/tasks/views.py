@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from tasks.forms import TaskForm, TaskModelForm
+from tasks.forms import TaskForm, TaskModelForm, TaskDetailForm
 from tasks.models import Employee, Task, TaskDetail, Project
 from datetime import date
 from django.db.models import Q, Count, Max, Min, Avg
+from django.contrib import messages
 
 def manager_dashboard(request):
-    type = request.GET.get('type', all)
+    type = request.GET.get('type', 'all')
     
     base_query = Task.objects.select_related('details').prefetch_related('assigned_to')
 
@@ -40,16 +41,63 @@ def test_page(request):
 
 ''' Django Model Form '''
 def create_task(request):
-    form = TaskModelForm()
-    context = {"form": form}
+    task_form = TaskModelForm()
+    task_detail_form = TaskDetailForm()
+    context = {"task_form": task_form, "task_detail_form": task_detail_form}
 
     if request.method == 'POST':
-        form = TaskModelForm(request.POST)
-        form.save()
-        context = {"form": form, "message": "Task Added Successfully."}
+        task_form = TaskModelForm(request.POST)
+        task_detail_form = TaskDetailForm(request.POST)
 
+        if task_form.is_valid() and task_detail_form.is_valid():
+            task = task_form.save()
+            task_detail = task_detail_form.save(commit=False)
+            task_detail.task = task
+            task_detail.save()
+
+        messages.success(request, "Task Created Successfully")
+        return redirect('create-task')
+    
     return render(request, "task_form.html", context)
 
+def update_task(request, id):
+    task = Task.objects.get(id = id)
+    task_form = TaskModelForm(instance = task)
+    if hasattr(task, 'details'):
+        task_detail_form = TaskDetailForm(instance = task.details)
+    else:
+        task_detail_form = TaskDetailForm()
+
+    context = {"task_form": task_form, "task_detail_form": task_detail_form}
+
+    if request.method == 'POST':
+        task_form = TaskModelForm(request.POST, instance = task)
+        if hasattr(task, 'details'):
+            task_detail_form = TaskDetailForm(request.POST, instance = task.details)
+        else:
+            task_detail_form = TaskDetailForm(request.POST)
+
+        if task_form.is_valid() and task_detail_form.is_valid():
+            task = task_form.save()
+            task_details = task_detail_form.save(commit=False)
+            task_details.task = task 
+            task_details.save()
+
+        messages.success(request, "Task Updated Successfully")
+        return redirect('update-task', id)
+    
+    return render(request, "task_form.html", context)
+
+def delete_task(request, id):
+    if request.method == 'POST':
+        task = Task.objects.get(id= id)
+        task.delete()
+        
+        messages.success(request, 'Task Deleted Successfully')
+        return redirect('manager-dashboard')
+    else:
+        messages.error(request, 'Something went wrong.')
+        return redirect('manager-dashboard')
 
 def view_task(request):
     
