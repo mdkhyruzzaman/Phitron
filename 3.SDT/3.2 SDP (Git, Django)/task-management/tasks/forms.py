@@ -17,12 +17,16 @@ class TaskForm(forms.Form):
         self.fields["assigned_to"].choices = [(emp.id, emp.name) for emp in employees]
 
 class StyledFormMixin:
+    '''Using Mixing Widget'''
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
+
     default_classes = "border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500"
 
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
-            if isinstance(field.widget, forms.TextInput):
-
+            if isinstance(field.widget, forms.TextInput) or isinstance(field.widget, forms.PasswordInput) or isinstance(field.widget, forms.EmailInput):
                 field.widget.attrs.update({
                     'class': self.default_classes,
                     'placeholder': f"Enter {field.label.lower()}"
@@ -56,11 +60,6 @@ class TaskModelForm(StyledFormMixin, forms.ModelForm):
             'due_date': forms.SelectDateWidget(),
             'assigned_to': forms.CheckboxSelectMultiple()
         }
-
-    '''Using Mixing Widget'''
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()
 
 class TaskDetailForm(StyledFormMixin, forms.ModelForm):
     class Meta:
